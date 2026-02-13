@@ -37,6 +37,15 @@ class ProfesorController extends Controller
     }
 
     public function guardar(Request $request){
+
+        // Validar los datos
+        $request->validate([
+            'dni' => 'required|unique:profesors,dni|numeric|size:8',
+            'nombres' => 'required',
+            'apellidos' => 'required',
+        ]);
+
+
         $profesor = new Profesor();
         $profesor->dni = $request->input("dni");
         $profesor->nombres = $request->input("nombres");
